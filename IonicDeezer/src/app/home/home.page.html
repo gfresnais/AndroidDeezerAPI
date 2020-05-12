@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-searchbar type="text" placeholder="Artiste" (keyup.enter)="onSearchArtist($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <h1>Deezer API search</h1>
+
+    <div style="height: 60vh;">
+      <ion-card *ngFor="let artist of listArtists;" (click)="onClickArtist(artist)">
+        <img src="{{artist.picture}}" alt="{{artist.name}}">
+        <ion-card-header>
+          <ion-card-title>
+            {{artist.name}}
+          </ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "IonicDeezer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
