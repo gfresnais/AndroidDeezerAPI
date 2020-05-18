@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +18,10 @@ import com.example.androiddeezer2020.R;
 import com.example.androiddeezer2020.service.data.Track;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> {
     private static final String TAG = "AdapterAlbum";
@@ -32,6 +37,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
 
         private TextView textTrackName;
         private TextView textTrackDuration;
+        private ImageButton playButton;
         private View itemView;
 
         public ViewHolder(View itemView) {
@@ -40,6 +46,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
             //c'est ici que l'on fait nos findView
             textTrackName = (TextView) itemView.findViewById(R.id.textTrackName);
             textTrackDuration = (TextView) itemView.findViewById(R.id.textTrackDuration);
+            playButton = (ImageButton) itemView.findViewById(R.id.playButton);
         }
     }
 
@@ -67,9 +74,13 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.textTrackName.setText(track.getTitle());
-        holder.textTrackDuration.setText(""+track.getDuration());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.FRANCE);
+        String str = format.format(new Date(track.getDuration()*1000));
+
+        holder.textTrackDuration.setText(str);
+
+        holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "click on <" + track.getTitle()+ ">");

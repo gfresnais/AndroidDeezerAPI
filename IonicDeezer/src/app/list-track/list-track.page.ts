@@ -14,12 +14,15 @@ export class ListTrackPage implements OnInit {
 
   id: number;
 
+  audio:HTMLAudioElement;
+
   constructor(public deezerService: DeezerService, public router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     console.log(`${this.TAG} initListTrackPage = ${this.id}`);
     this.searchTracks();
+    this.audio = new Audio();
   }
 
   searchTracks() {
@@ -29,5 +32,16 @@ export class ListTrackPage implements OnInit {
     }).catch( err => {
         console.log(` ${this.TAG} err : ${err} `);
     });
+  }
+
+  play(src: any) {
+    this.audio.src = src;
+    this.audio.load();
+    this.audio.play();
+  }
+
+  pause() {
+    if(this.audio.paused) this.audio.play();
+    else this.audio.pause();
   }
 }

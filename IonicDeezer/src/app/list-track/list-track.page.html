@@ -11,15 +11,18 @@
   <div id="container">
     <div style="height: 80vh;">
       <ion-card *ngFor="let track of listTracks;">
-        <audio src="{{track.preview}}" controls></audio>
         <ion-card-header>
           <ion-card-title>
             {{track.title}}
           </ion-card-title>
           <ion-card-subtitle>
-            {{track.duration}}
+            {{track.duration}} seconds
           </ion-card-subtitle>
         </ion-card-header>
+        <div class="icons">
+          <ion-icon name="play-circle-outline" (click)="play(track.preview)" size="large"></ion-icon>
+          <ion-icon name="pause-circle-outline" (click)="pause()" size="large"></ion-icon>
+        </div>
       </ion-card>
     </div>
   </div>
